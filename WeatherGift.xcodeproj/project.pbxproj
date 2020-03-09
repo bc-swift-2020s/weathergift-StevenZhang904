@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		779045CD2415C14100AF288F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779045CC2415C14100AF288F /* AppDelegate.swift */; };
 		779045CF2415C14100AF288F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779045CE2415C14100AF288F /* SceneDelegate.swift */; };
-		779045D12415C14100AF288F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779045D02415C14100AF288F /* ViewController.swift */; };
 		779045D42415C14100AF288F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779045D22415C14100AF288F /* Main.storyboard */; };
 		779045D62415C14400AF288F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779045D52415C14400AF288F /* Assets.xcassets */; };
 		779045D92415C14400AF288F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779045D72415C14400AF288F /* LaunchScreen.storyboard */; };
+		779045E12415C18D00AF288F /* WeatherLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779045E02415C18D00AF288F /* WeatherLocation.swift */; };
+		779045E32415CAB800AF288F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779045E22415CAB800AF288F /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		779045C92415C14100AF288F /* WeatherGift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherGift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		779045CC2415C14100AF288F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		779045CE2415C14100AF288F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		779045D02415C14100AF288F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		779045D32415C14100AF288F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		779045D52415C14400AF288F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		779045D82415C14400AF288F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		779045DA2415C14400AF288F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		779045E02415C18D00AF288F /* WeatherLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLocation.swift; sourceTree = "<group>"; };
+		779045E22415CAB800AF288F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +60,8 @@
 			children = (
 				779045CC2415C14100AF288F /* AppDelegate.swift */,
 				779045CE2415C14100AF288F /* SceneDelegate.swift */,
-				779045D02415C14100AF288F /* ViewController.swift */,
+				779045E02415C18D00AF288F /* WeatherLocation.swift */,
+				779045E22415CAB800AF288F /* ViewController.swift */,
 				779045D22415C14100AF288F /* Main.storyboard */,
 				779045D52415C14400AF288F /* Assets.xcassets */,
 				779045D72415C14400AF288F /* LaunchScreen.storyboard */,
@@ -138,7 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				779045D12415C14100AF288F /* ViewController.swift in Sources */,
+				779045E32415CAB800AF288F /* ViewController.swift in Sources */,
+				779045E12415C18D00AF288F /* WeatherLocation.swift in Sources */,
 				779045CD2415C14100AF288F /* AppDelegate.swift in Sources */,
 				779045CF2415C14100AF288F /* SceneDelegate.swift in Sources */,
 			);
