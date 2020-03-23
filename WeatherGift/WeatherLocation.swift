@@ -8,8 +8,16 @@
 
 import UIKit
  
- struct WeatherLocation {
+ class WeatherLocation: Codable {
     var name: String
     var latituide: Double
     var longitutde: Double
+    
+    init(name: String, latitude: Double, longtitude: Double) {
+        self.name = name
+        self.latituide = latitude
+        self.longitutde = longtitude
+    }
+ 
  }
+
