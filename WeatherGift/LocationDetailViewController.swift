@@ -17,9 +17,10 @@ class LocationDetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var weatherLocation: WeatherLocation!
+    //var weatherLocation: WeatherLocation!
     var locationIndex = 0
-    var weatherDetail: WeatherLocation!
+    //var weatherDetail: WeatherDetail!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +32,24 @@ class LocationDetailViewController: UIViewController {
     
     func updateUserInterface(){
         let pageViewController = UIApplication.shared.windows.first!.rootViewController as! PageViewController
-        weatherLocation = pageViewController.weatherLocations[locationIndex]
-        weatherDetail = WeatherDetail(name: weatherLocation.name, latitude: WeatherLocation.latitude, longtitude: WeatherLocation.longtitude)
+        let weatherLocation = pageViewController.weatherLocations[locationIndex]
+        let weatherDetail = WeatherDetail(name: weatherLocation.name, latitude: weatherLocation.latituide, longtitude: weatherLocation.longitutde)
         dateLabel.text = ""
         placeLabel.text = weatherLocation.name
         temperatureLabel.text = "--°"
         summaryLabel.text = ""
         pageControl.numberOfPages = pageViewController.weatherLocations.count
         pageControl.currentPage = locationIndex
-        weatherDetail.getData()
+        weatherDetail.getData{
+            DispatchQueue.main.async {
+                self.dateLabel.text = weatherDetail.timezone
+                self.placeLabel.text = weatherLocation.name
+                self.temperatureLabel.text = "\(weatherDetail.temperature)°"
+                self.summaryLabel.text = weatherDetail.summary
+                self.imageView.image = UIImage(named: weatherDetail.dailyIcon)
+            }
+           
+        }
     }
     
     override func prepare(for segue:UIStoryboardSegue, sender: Any?){
