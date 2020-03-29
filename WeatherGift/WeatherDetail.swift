@@ -35,7 +35,7 @@ struct HourlyWeather: Codable{
     var hour: String
     var hourlyIcon: String
     var hourlyTemperature: Int
-    var hourlyPrecipProbaility: Int
+    var hourlyPrecipProbability: Int
 }
 
 class WeatherDetail: WeatherLocation{
@@ -122,19 +122,19 @@ class WeatherDetail: WeatherLocation{
                 let dailyLow = Int(result.daily.data[index].temperatureLow.rounded())
                 let dailyWeather = DailyWeather(dailyIcon: dailyIcon, dailyWeekday: dailyWeekday, dailySummary: dailySummary, dailyHigh: dailyHigh, dailyLow: dailyLow)
                 self.dailyWeatherData.append(dailyWeather)
-                print("Day: \(dailyWeather.dailyWeekday) High: \(dailyWeather.dailyHigh) Low:\(dailyWeather.dailyLow)")
+                //print("Day: \(dailyWeather.dailyWeekday) High: \(dailyWeather.dailyHigh) Low:\(dailyWeather.dailyLow)")
             }
-            
-            for index in 0..<result.hourly.data.count{
+            let lastHour = min(24, result.hourly.data.count)
+            for index in 0..<lastHour{
                 let hourlyDate = Date(timeIntervalSince1970: result.hourly.data[index].time)
                 hourlyFormatter.timeZone = TimeZone(identifier: result.timezone)
                 let hour = hourlyFormatter.string(from: hourlyDate)
                 let hourlyIcon = result.hourly.data[index].icon
-                let precipProbaility = Int((result.hourly.data[index].precipProbaility * 100).rounded())
+                let precipProbability = Int((result.hourly.data[index].precipProbaility * 100).rounded())
                 let temperature = Int(result.hourly.data[index].temperature.rounded())
-                let hourlyWeather = HourlyWeather(hour: hour, hourlyIcon: hourlyIcon, hourlyTemperature: temperature, hourlyPrecipProbaility: precipProbaility)
+                let hourlyWeather = HourlyWeather(hour: hour, hourlyIcon: hourlyIcon, hourlyTemperature: temperature, hourlyPrecipProbability: precipProbability)
                 self.hourlyWeatherData.append(hourlyWeather)
-                print("Hour: \(hourlyWeather.hour), Icon: \(hourlyWeather.hourlyIcon), Temperature: \(hourlyWeather.hourlyTemperature), PrecipProbaility: \(hourlyWeather.hourlyPrecipProbaility)")
+                print("Hour: \(hourlyWeather.hour), Icon: \(hourlyWeather.hourlyIcon), Temperature: \(hourlyWeather.hourlyTemperature), PrecipProbaility: \(hourlyWeather.hourlyPrecipProbability)")
             }
             
          }catch{
