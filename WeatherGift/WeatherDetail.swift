@@ -15,6 +15,13 @@ private let dateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
+private let hourlyFormatter: DateFormatter = {
+    print("I just created a hourly formatter in WeatherDetail.swift")
+    let hourlyFormatter = DateFormatter()
+    hourlyFormatter.dateFormat = "ha"
+    return hourlyFormatter
+}()
+
 
 struct DailyWeather: Codable{
     var dailyIcon: String
@@ -24,12 +31,20 @@ struct DailyWeather: Codable{
     var dailyLow: Int
 }
 
+struct HourlyWeather: Codable{
+    var hour: String
+    var hourlyIcon: String
+    var hourlyTemperature: Int
+    var hourlyPrecipProbaility: Int
+}
+
 class WeatherDetail: WeatherLocation{
     
     private struct Result:Codable{
         var timezone : String
         var currently: Currently
         var daily: Daily
+        var hourly: Hourly
     }
     
     private struct Currently: Codable{
@@ -51,12 +66,25 @@ class WeatherDetail: WeatherLocation{
         var temperatureLow: Double
     }
     
+    private struct Hourly: Codable{
+        var data: [HourlyData]
+    }
+    
+    private struct HourlyData: Codable{
+        var time: TimeInterval
+        var icon: String
+        var precipProbaility: Double
+        var temperature: Double
+    }
+    
     var timezone = ""
     var currentTime = 0.0
     var temperature = 0
     var summary = ""
     var dailyIcon = ""
     var dailyWeatherData: [DailyWeather] = []
+    var hourlyWeatherData: [HourlyWeather] = []
+
     
     func getData(completed: @escaping  () -> ()){
          let coordinates = "\(latituide),\(longitutde)"
@@ -75,7 +103,6 @@ class WeatherDetail: WeatherLocation{
              if let error = error{
                  print("error \(error.localizedDescription)")
              }
-             
          
          do{
             let result = try JSONDecoder().decode(Result.self, from: data!)
@@ -84,6 +111,7 @@ class WeatherDetail: WeatherLocation{
             self.temperature = Int(result.currently.temperature.rounded())
             self.summary = result.daily.summary
             self.dailyIcon = result.daily.icon
+            
             for index in 0..<result.daily.data.count{
                 let weekDayDate = Date(timeIntervalSince1970: result.daily.data[index].time)
                 dateFormatter.timeZone = TimeZone(identifier: result.timezone)
@@ -97,8 +125,20 @@ class WeatherDetail: WeatherLocation{
                 print("Day: \(dailyWeather.dailyWeekday) High: \(dailyWeather.dailyHigh) Low:\(dailyWeather.dailyLow)")
             }
             
+            for index in 0..<result.hourly.data.count{
+                let hourlyDate = Date(timeIntervalSince1970: result.hourly.data[index].time)
+                hourlyFormatter.timeZone = TimeZone(identifier: result.timezone)
+                let hour = hourlyFormatter.string(from: hourlyDate)
+                let hourlyIcon = result.hourly.data[index].icon
+                let precipProbaility = Int((result.hourly.data[index].precipProbaility * 100).rounded())
+                let temperature = Int(result.hourly.data[index].temperature.rounded())
+                let hourlyWeather = HourlyWeather(hour: hour, hourlyIcon: hourlyIcon, hourlyTemperature: temperature, hourlyPrecipProbaility: precipProbaility)
+                self.hourlyWeatherData.append(hourlyWeather)
+                print("Hour: \(hourlyWeather.hour), Icon: \(hourlyWeather.hourlyIcon), Temperature: \(hourlyWeather.hourlyTemperature), PrecipProbaility: \(hourlyWeather.hourlyPrecipProbaility)")
+            }
+            
          }catch{
-             print("JSON error: \(error.localizedDescription)")
+            print("JSON error: \(error.localizedDescription)")
          }
             completed()
          }
