@@ -134,6 +134,13 @@ extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
   func wasCancelled(_ viewController: GMSAutocompleteViewController) {
     dismiss(animated: true, completion: nil)
   }
+    //later part
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+      UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
 
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+      UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
 
 }

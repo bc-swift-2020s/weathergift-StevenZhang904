@@ -73,7 +73,7 @@ class WeatherDetail: WeatherLocation{
     private struct HourlyData: Codable{
         var time: TimeInterval
         var icon: String
-        var precipProbaility: Double
+        var precipProbability: Double
         var temperature: Double
     }
     
@@ -130,7 +130,7 @@ class WeatherDetail: WeatherLocation{
                 hourlyFormatter.timeZone = TimeZone(identifier: result.timezone)
                 let hour = hourlyFormatter.string(from: hourlyDate)
                 let hourlyIcon = result.hourly.data[index].icon
-                let precipProbability = Int((result.hourly.data[index].precipProbaility * 100).rounded())
+                let precipProbability = Int((result.hourly.data[index].precipProbability * 100).rounded())
                 let temperature = Int(result.hourly.data[index].temperature.rounded())
                 let hourlyWeather = HourlyWeather(hour: hour, hourlyIcon: hourlyIcon, hourlyTemperature: temperature, hourlyPrecipProbability: precipProbability)
                 self.hourlyWeatherData.append(hourlyWeather)

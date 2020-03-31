@@ -30,6 +30,8 @@ class LocationDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        clearUserInterface()
+        
         tableView.delegate = self
         tableView.dataSource = self
         collectionView.delegate = self
@@ -50,6 +52,7 @@ class LocationDetailViewController: UIViewController {
         let pageViewController = UIApplication.shared.windows.first!.rootViewController as! PageViewController
         let weatherLocation = pageViewController.weatherLocations[locationIndex]
         weatherDetail = WeatherDetail(name: weatherLocation.name, latitude: weatherLocation.latituide, longtitude: weatherLocation.longitutde)
+
         dateLabel.text = ""
         placeLabel.text = weatherLocation.name
         temperatureLabel.text = "--°"
@@ -68,10 +71,12 @@ class LocationDetailViewController: UIViewController {
                 self.tableView.reloadData()
                 self.collectionView.reloadData()
             }
-           
+
         }
     }
     
+    
+
     override func prepare(for segue:UIStoryboardSegue, sender: Any?){
         let destination = segue.destination as! LocationListViewController
         let pageViewController = UIApplication.shared.windows.first!.rootViewController as! PageViewController
@@ -127,7 +132,6 @@ extension LocationDetailViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let hourlyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCell", for: indexPath) as! HourlyCollectionViewCell
         hourlyCell.hourWeather = weatherDetail.hourlyWeatherData[indexPath.row]
-        
         
         return hourlyCell
     }
